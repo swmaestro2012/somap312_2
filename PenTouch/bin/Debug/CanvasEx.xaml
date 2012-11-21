@@ -5,7 +5,21 @@
     xmlns:local="using:PenTouch"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="239" Width="379"                                                                                                                                                                                     Background="#FFFFFFFF"                                                                                     ManipulationMode="Scale" >
+    mc:Ignorable="d" Height="239" Width="379"                                                                                                                                                                                                                        
+	                                                                                                                                    
+	IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsTapEnabled="False" Background="White">
+
+	<Grid.Resources>
+		<Style x:Name="PenTouchEllipseStyle" TargetType="Ellipse">
+			<Setter Property="Width" Value="40" />
+			<Setter Property="Height" Value="40" />
+			<Setter Property="StrokeThickness" Value="3" />
+			<Setter Property="Stroke" Value="Black" />
+		</Style>	
+	</Grid.Resources>
+	
+	<local:TileBackground x:Name="tileBackground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
 	<Canvas x:Name="rootCanvas">
 		<Canvas x:Name="canvas">
 			<Canvas.RenderTransform>
@@ -14,34 +28,37 @@
 					<TranslateTransform x:Name="translate" />
 				</TransformGroup>
 			</Canvas.RenderTransform>
-			<Canvas.Resources>
-				<Storyboard x:ConnectionId='2' x:Name="storyboard"                            >
-					<DoubleAnimation x:Name="animScaleX" Duration="0:0:0.3" Storyboard.TargetName="scale" Storyboard.TargetProperty="ScaleX">
-						<DoubleAnimation.EasingFunction>
-							<ExponentialEase />
-						</DoubleAnimation.EasingFunction>
-					</DoubleAnimation>
-					<DoubleAnimation x:Name="animScaleY" Duration="0:0:0.3" Storyboard.TargetName="scale" Storyboard.TargetProperty="ScaleY">
-						<DoubleAnimation.EasingFunction>
-							<ExponentialEase />
-						</DoubleAnimation.EasingFunction>
-					</DoubleAnimation>
-					<DoubleAnimation x:Name="animTranslateX" Duration="0:0:0.3" Storyboard.TargetName="translate" Storyboard.TargetProperty="X">
-						<DoubleAnimation.EasingFunction>
-							<ExponentialEase />
-						</DoubleAnimation.EasingFunction>
-					</DoubleAnimation>
-					<DoubleAnimation x:Name="animTranslateY" Duration="0:0:0.3" Storyboard.TargetName="translate" Storyboard.TargetProperty="Y">
-						<DoubleAnimation.EasingFunction>
-							<ExponentialEase />
-						</DoubleAnimation.EasingFunction>
-					</DoubleAnimation>
-				</Storyboard>
-			</Canvas.Resources>
-			<Canvas x:Name="bezierRender" />
-			<Canvas x:Name="liveRender" />
-			<!--Image x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/Logo.png" Stretch="Fill" /-->
+		</Canvas>
+		<Canvas x:Name="onePointWait">
+			<Canvas x:Name="onePointButtons">
+				<Ellipse x:ConnectionId='10' Canvas.Left="50" Canvas.Top="-50" Style="{StaticResource PenTouchEllipseStyle}"                                              >
+					<Ellipse.Fill>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="Red"/>
+							<GradientStop Color="Blue" Offset="0.25"/>
+							<GradientStop Color="Yellow" Offset="0.5"/>
+							<GradientStop Color="Lime" Offset="0.75"/>
+							<GradientStop Color="White" Offset="1"/>
+						</LinearGradientBrush>
+					</Ellipse.Fill>
+				</Ellipse>
+				<Ellipse x:ConnectionId='11' Canvas.Left="50" Canvas.Top="10" Style="{StaticResource PenTouchEllipseStyle}"                                            Fill="White" />
+			</Canvas>
+			<Canvas x:Name="colorSelect" Canvas.Left="70" Canvas.Top="-20">
+				<Ellipse x:ConnectionId='4' Fill="Red"                                                Style="{StaticResource PenTouchEllipseStyle}" />
+				<Ellipse x:ConnectionId='5' Fill="Blue"                                                Style="{StaticResource PenTouchEllipseStyle}" />
+				<Ellipse x:ConnectionId='6' Fill="Yellow"                                                Style="{StaticResource PenTouchEllipseStyle}" />
+				<Ellipse x:ConnectionId='7' Fill="Lime"                                                Style="{StaticResource PenTouchEllipseStyle}" />
+				<Ellipse x:ConnectionId='8' Fill="White"                                                Style="{StaticResource PenTouchEllipseStyle}" />
+				<Ellipse x:ConnectionId='9' Fill="Black"                                                Stroke="White" Style="{StaticResource PenTouchEllipseStyle}" />
+			</Canvas>
+			<Canvas x:ConnectionId='3' x:Name="drawShape" Canvas.Left="70" Canvas.Top="30"                                                                                     />
+		</Canvas>
+		<Canvas x:Name="twoPointWait">
+			<Canvas x:Name="twoPointButtons">
+				<Ellipse x:ConnectionId='2' x:Name="strokeSelect" Canvas.Left="-20" Canvas.Top="-20" Style="{StaticResource PenTouchEllipseStyle}" Fill="White"                                                                                                                                                  HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Canvas>
 		</Canvas>
 	</Canvas>
-</Grid>    
+</Grid>
 

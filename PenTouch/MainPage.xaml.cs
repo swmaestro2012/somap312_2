@@ -36,7 +36,10 @@ namespace PenTouch
 		/// 속성은 일반적으로 페이지를 구성하는 데 사용됩니다.</param>
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
+			mainCanvas.SetPenColor(colorSelectButton);
+			mainCanvas.SetPenThickness(thickSelectSlider);
 
+			colorSelectButton.Foreground = null;
 		}
 
 		private void ClearButtonClicked(object sender, RoutedEventArgs e)
@@ -56,11 +59,8 @@ namespace PenTouch
 
 		private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			if (mainCanvas == null)
-				return;
-
-			mainCanvas.ChangePenColor((colorSelectButton.Foreground as SolidColorBrush).Color);
-			colorSelectPopup.IsOpen = false;
+			if (colorSelectPopup != null)
+				colorSelectPopup.IsOpen = false;
 		}
 
 		private void ThickSelectButtonClicked(object sender, RoutedEventArgs e)
@@ -70,15 +70,12 @@ namespace PenTouch
 
 		private void ThicknessChanged(object sender, RangeBaseValueChangedEventArgs e)
 		{
-			if (mainCanvas == null)
-				return;
 
-			mainCanvas.ChangePenThickness(thickSelectSlider.Value);
 		}
 
 		private void PalmBlockButtonClicked(object sender, RoutedEventArgs e)
 		{
-			mainCanvas.StartPalmBlockSelect();
+			mainCanvas.PalmBlockSelect();
 			bottomAppBar.IsOpen = false;
 		}
 	}

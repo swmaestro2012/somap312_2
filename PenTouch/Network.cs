@@ -4,14 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.Foundation;
 using Windows.Networking;
 using Windows.Networking.Sockets;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Shapes;
+using Windows.UI;
 
 namespace PenTouch
 {
@@ -24,37 +27,6 @@ namespace PenTouch
         {
             socket = new StreamSocket();
             writer = null;
-        }
-
-        public static string process(string data)
-        {
-            string[] DataList = data.Split('P');
-            if (DataList.Count() < 1)
-                return data;
-            for (int i = 1; i < DataList.Count(); i++)
-            {
-                //Debug.WriteLine(DataList[i]);
-                if (DataList[i].Length == 0 || DataList[i][DataList[i].Length - 1] != '!')
-                    return "P" + DataList[i];
-                Debug.WriteLine(DataList[i]);
-                string[] temp = DataList[i].Split(',');
-                //for (int j = 0; j < temp.Count(); j++)
-                //Debug.WriteLine(temp[i]);
-                Point p1, p2, p3, org;
-                float pressure;
-                p1.X = Double.Parse(temp[0]);
-                p1.Y = Double.Parse(temp[1]);
-                p2.X = Double.Parse(temp[2]);
-                p2.Y = Double.Parse(temp[3]);
-                p3.X = Double.Parse(temp[4]);
-                p3.Y = Double.Parse(temp[5]);
-                org.X = Double.Parse(temp[6]);
-                org.Y = Double.Parse(temp[7]);
-                pressure = (float)Double.Parse(temp[8].Split('!')[0]);
-
-                OnNetworkRecieved(p1, p2, p3, org, pressure);
-            }
-            return "";
         }
 
         public static async void connect()
@@ -75,37 +47,66 @@ namespace PenTouch
                 try
                 {
                     String data = "";
+                    uint stringLength = 1;
                     while (true)
-                    {/*
-                        uint sizeFieldCount = await reader.LoadAsync(sizeof(uint));
-                        if (sizeFieldCount != sizeof(uint))
+                    { 
+                        uint actualStringLength = await reader.LoadAsync(stringLength);
+                            
+                        data = reader.ReadString(actualStringLength);
+                        if (data.Equals("S"))
                         {
-                            // The underlying socket was closed before we were able to read the whole data.
-                            Debug.WriteLine("onconnection end");
-                            return;
-                        }
-                        // Read the string.*/
-                        //uint stringLength = reader.ReadUInt32();
-                        uint stringLength = 1;
-
-                        if (stringLength != 0)
-                        {
-                            //Debug.WriteLine(stringLength);
-
-                            uint actualStringLength = await reader.LoadAsync(stringLength);
-                            /*if (stringLength != actualStringLength)
+                            uint actualdataLength = await reader.LoadAsync(4);
+                            byte[] color_array = new byte[4];
+                            reader.ReadBytes(color_array);
+                            Color temp_color = new Color();
+                            temp_color.A = color_array[0];
+                            temp_color.R = color_array[1];
+                            temp_color.G = color_array[2];
+                            temp_color.B = color_array[3];
+                            SolidColorBrush color = new SolidColorBrush(temp_color);
+                            double x1,x2,y1,y2,thick;
+                            var list = new List<Windows.UI.Xaml.UIElement>();
+                            while (true)
                             {
-                                // The underlying socket was closed before we were able to read the whole data.
-                                Debug.WriteLine("onconnection end");
-                                return;
-                            }*/
-                            //Debug.WriteLine(actualStringLength);
-                            data += reader.ReadString(actualStringLength);
+                                actualStringLength = await reader.LoadAsync(1);
+                                data = reader.ReadString(actualStringLength);
+                                if (data.Equals("P"))
+                                {
+                                    actualStringLength = await reader.LoadAsync(sizeof(double) * 5);
+                                    x1 = reader.ReadDouble();
+                                    y1 = reader.ReadDouble();
+                                    x2 = reader.ReadDouble();
+                                    y2 = reader.ReadDouble();
+                                    thick = reader.ReadDouble();
 
-                            // Display the string on the screen. The event is invoked on a non-UI thread, so we need to marshal the text back to the UI thread.
-                            //Debug.WriteLine(String.Format("Receive data: \"{0}\"", data));
-                            data = process(data);
+                                    Line l = new Line()
+                                    {
+                                        X1 = x1,
+                                        Y1 = y1,
+                                        X2 = x2,
+                                        Y2 = y2,
+                                        StrokeThickness = thick,
+                                        Stroke = color,
+                                        StrokeStartLineCap = PenLineCap.Round,
+                                        StrokeEndLineCap = PenLineCap.Round,
+                                        StrokeLineJoin = PenLineJoin.Round,
+                                    };
+
+                                    list.Add(l);
+                                }
+                                else if (data.Equals("E"))
+                                {
+                                    OnNetworkRecieved(list);
+                                    Debug.WriteLine("Get one stroke");
+                                    break;
+                                }
+                                else
+                                    Debug.WriteLine("Expected P or E, {0} ,Network Error!!",data);
+                            }
                         }
+                        else
+                            Debug.WriteLine("Expected S, {0} , Network Error!!",data);
+                        
                     }
                 }
                 catch (Exception exception)
@@ -133,7 +134,7 @@ namespace PenTouch
             }
         }
 
-        public static async void sendData(Point p1, Point p2, Point p3, Point org, float pressure)
+        /*public static async void sendData(Point p1, Point p2, Point p3, Point org, float pressure)
         {
             if (writer == null)
                 writer = new DataWriter(socket.OutputStream);
@@ -160,9 +161,55 @@ namespace PenTouch
 
                 Debug.WriteLine("Send failed with error: " + exception.Message);
             }
+        }*/
+
+        public static async void sendData(List<Windows.UI.Xaml.UIElement> collection)
+        {
+            if (writer == null)
+                writer = new DataWriter(socket.OutputStream);
+            //String data = "S";
+            if (collection.Count == 0)
+                return;
+            Windows.UI.Color temp_color = ((collection[0] as Line).Stroke as SolidColorBrush).Color;
+            byte[] temp_array = new byte[4];
+            temp_array[0] = temp_color.A;
+            temp_array[1] = temp_color.R;
+            temp_array[2] = temp_color.G;
+            temp_array[3] = temp_color.B;
+            writer.WriteString("S");
+            writer.WriteBytes(temp_array);
+            foreach (var child in collection)
+            {
+                var line = child as Line;
+
+                if (line == null)
+                    continue;
+                writer.WriteString("P");
+                writer.WriteDouble(line.X1);
+                writer.WriteDouble(line.Y1);
+                writer.WriteDouble(line.X2);
+                writer.WriteDouble(line.Y2);
+                writer.WriteDouble(line.StrokeThickness);
+            }
+            writer.WriteString("E");
+            try
+            {
+                await writer.StoreAsync();
+                Debug.WriteLine("\"" + "DATA" + "\" sent successfully.");
+            }
+            catch (Exception exception)
+            {
+                // If this is an unknown status it means that the error if fatal and retry will likely fail.
+                if (SocketError.GetStatus(exception.HResult) == SocketErrorStatus.Unknown)
+                {
+                    throw;
+                }
+
+                Debug.WriteLine("Send failed with error: " + exception.Message);
+            }
         }
 
-        public delegate void OnNetworkRecievedDelegate(Point p1, Point p2, Point p3, Point p4, float pressure);
+        public delegate void OnNetworkRecievedDelegate(List<Windows.UI.Xaml.UIElement> lineList);
         public static event OnNetworkRecievedDelegate OnNetworkRecieved;
     }
 }

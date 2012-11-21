@@ -19,6 +19,33 @@
     <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Debug\PenTouch.pdb">
       <PackagePath>PenTouch.pdb</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.Direct2D1.dll">
+      <PackagePath>SharpDX.Direct2D1.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.Direct3D11.dll">
+      <PackagePath>SharpDX.Direct3D11.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.dll">
+      <PackagePath>SharpDX.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.DXGI.dll">
+      <PackagePath>SharpDX.DXGI.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.xml">
+      <PackagePath>SharpDX.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.Direct2D1.xml">
+      <PackagePath>SharpDX.Direct2D1.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.Direct3D11.xml">
+      <PackagePath>SharpDX.Direct3D11.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Standard-winrt\SharpDX.DXGI.xml">
+      <PackagePath>SharpDX.DXGI.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Assets\bgline.JPG">
+      <PackagePath>Assets\bgline.JPG</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Assets\Logo.png">
       <PackagePath>Assets\Logo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -37,6 +64,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Debug\TileBackground.xaml">
+      <PackagePath>TileBackground.xaml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Debug\CanvasEx.xaml">
       <PackagePath>CanvasEx.xaml</PackagePath>

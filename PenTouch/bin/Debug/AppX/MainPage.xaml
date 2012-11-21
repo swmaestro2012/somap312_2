@@ -6,11 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-	<Grid Background="#FF970000">
+	
+	<Grid>
 		<local:CanvasEx x:Name="mainCanvas" Grid.Column="1" Margin="0" Width="Auto" Height="Auto"/>
 	</Grid>
-
+	
 	<Page.BottomAppBar>
 		<AppBar x:Name="bottomAppBar" Background="#77000000">
 			<Grid>
@@ -25,7 +25,7 @@
 							<PopupThemeTransition />
 						</TransitionCollection>
 					</Popup.ChildTransitions>
-					<ListBox x:ConnectionId='7' x:Name="colorSelectList" Width="200" Height="200" Margin="50, -250, 0, 0"                                       BorderBrush="White" Background="#77000000" SelectedIndex="5">
+					<ListBox x:ConnectionId='7' x:Name="colorSelectList" Width="200" Height="200" Margin="50, -250, 0, 0" SelectedIndex="5"                                       BorderBrush="White" Background="#77000000">
 						<ListBox.ItemTemplate>
 							<DataTemplate>
 								<Grid>
@@ -61,10 +61,10 @@
 				<StackPanel Orientation="Horizontal">
 					<Button x:ConnectionId='2' Style="{StaticResource UndoAppBarButtonStyle}"                           />
 					<Button x:ConnectionId='3' x:Name="colorSelectButton" Style="{StaticResource HighlightAppBarButtonStyle}"
-                            Foreground="{Binding ElementName=colorSelectList, Path=SelectedItem, Mode=OneWay}"
+                            Foreground="{Binding ElementName=colorSelectList, Path=SelectedItem, Mode=TwoWay}"
                             AutomationProperties.Name="Color"                                  />
 					<Button x:ConnectionId='4' Style="{StaticResource AppBarButtonStyle}" AutomationProperties.Name="Thickness" 
-                                                             Content="{Binding ElementName=thickSelectSlider, Path=Value, Mode=OneWay}" />
+                                                             Content="{Binding ElementName=thickSelectSlider, Path=Value, Mode=TwoWay}" />
 					<Button x:ConnectionId='5' Style="{StaticResource TouchPointerAppBarButtonStyle}" AutomationProperties.Name="Palm Block" 
                                                            />
 				</StackPanel>

@@ -52,33 +52,27 @@ namespace PenTouchServer
 						{
 							while ((count = stream.Read(bytes, 0, bytes.Length)) != 0) 
 							{
-								data += System.Text.Encoding.ASCII.GetString(bytes, 0, count);
-								Console.WriteLine(i + " : " + data);
+                                for (int j = 0; j < array.Count(); j++)
+                                {
+                                    if (i != j)
+                                    {
+                                        try
+                                        {
+                                            array[j].GetStream().Write(bytes, 0, count);
+                                        }
+                                        catch (Exception E)
+                                        {
+                                            Console.WriteLine("write failed");
+                                            array.RemoveAt(j);
+                                            j--;
+                                        }
+                                    }
+                                }
 							}
 						}
 						catch (Exception E)
 						{
 							//Console.WriteLine(i + " : " + E.Message);
-						}
-						if (data.Length != 0)
-						{
-							byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-							for (int j = 0; j < array.Count(); j++)
-							{
-								if (i != j)
-								{
-									try
-									{
-										array[j].GetStream().Write(msg, 0, msg.Length);
-									}
-									catch (Exception E)
-									{
-										Console.WriteLine("write failed");
-										array.RemoveAt(j);
-										j--;
-									}
-								}
-							}
 						}
 					}
 				}
