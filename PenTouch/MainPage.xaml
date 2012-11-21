@@ -1,0 +1,77 @@
+﻿<Page x:Name="page"
+    x:Class="PenTouch.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PenTouch"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Grid Background="#FF970000">
+		<local:CanvasEx x:Name="mainCanvas" Grid.Column="1" Margin="0" Width="Auto" Height="Auto"/>
+	</Grid>
+
+	<Page.BottomAppBar>
+		<AppBar x:Name="bottomAppBar" Background="#77000000">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<Popup x:Name="colorSelectPopup" HorizontalOffset="0" VerticalOffset="0" IsLightDismissEnabled="True">
+					<Popup.ChildTransitions>
+						<TransitionCollection>
+							<PopupThemeTransition />
+						</TransitionCollection>
+					</Popup.ChildTransitions>
+					<ListBox x:Name="colorSelectList" Width="200" Height="200" Margin="50, -250, 0, 0" SelectionChanged="OnSelectionChanged" BorderBrush="White" Background="#77000000" SelectedIndex="5">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Rectangle Width="35" Height="20" Fill="{Binding}" Stroke="White" Margin="5,0"/>
+									<TextBlock Grid.Column="1" Margin="10,0,0,0" Text="{Binding}" Foreground="White"/>
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+						<x:String>Red</x:String>
+						<x:String>Blue</x:String>
+						<x:String>Yellow</x:String>
+						<x:String>Lime</x:String>
+						<x:String>White</x:String>
+						<x:String>Black</x:String>
+					</ListBox>
+				</Popup>
+				<Popup x:Name="thickSelectPopup" HorizontalOffset="0" VerticalOffset="0" IsLightDismissEnabled="True">
+					<Popup.ChildTransitions>
+						<TransitionCollection>
+							<PopupThemeTransition />
+						</TransitionCollection>
+					</Popup.ChildTransitions>
+					<Border Margin="225, -140, 0, 20"  Background="#77000000" BorderBrush="White" BorderThickness="2">
+						<Slider x:Name="thickSelectSlider" Margin="0, 0, 0, 0" Width="Auto" Height="100" Orientation="Vertical" 
+                                Background="DarkGray" Foreground="Gray" BorderBrush="Black" BorderThickness="2" Maximum="40" Minimum="1" Value="4" ValueChanged="ThicknessChanged" />
+					</Border>
+				</Popup>
+
+				<StackPanel Orientation="Horizontal">
+					<Button Style="{StaticResource UndoAppBarButtonStyle}" Click="UndoButtonClicked" />
+					<Button x:Name="colorSelectButton" Style="{StaticResource HighlightAppBarButtonStyle}"
+                            Foreground="{Binding ElementName=colorSelectList, Path=SelectedItem, Mode=OneWay}"
+                            AutomationProperties.Name="Color" Click="ColorSelectButtonClicked" />
+					<Button Style="{StaticResource AppBarButtonStyle}" AutomationProperties.Name="Thickness" 
+                            Click="ThickSelectButtonClicked" Content="{Binding ElementName=thickSelectSlider, Path=Value, Mode=OneWay}" />
+					<Button Style="{StaticResource TouchPointerAppBarButtonStyle}" AutomationProperties.Name="Palm Block" 
+                            Click="PalmBlockButtonClicked" />
+				</StackPanel>
+				<StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+					<Button Style="{StaticResource DiscardAppBarButtonStyle}" AutomationProperties.Name ="Clear" Click="ClearButtonClicked" />
+				</StackPanel>
+			</Grid>
+		</AppBar>
+	</Page.BottomAppBar>
+</Page>

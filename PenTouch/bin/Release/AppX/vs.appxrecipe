@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>CODE-ATHEI</Machine>
+    <WindowsUser>건우</WindowsUser>
+    <SolutionConfiguration>Release|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <RegisteredManifestChecksum>006EA27B77AA2F013BF426A4494AB5DEC9BF3BDDDBCB8782E165DD8E62E2172A</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>5017725b-d6da-49da-9fe4-87ce179f189d_1.0.0.0_neutral__ca4mn4n8ykpm6</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>5017725b-d6da-49da-9fe4-87ce179f189d_ca4mn4n8ykpm6!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>5017725b-d6da-49da-9fe4-87ce179f189d</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=탕</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Programming\PenTouch\PenTouch\bin\Release\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-10-23T04:49:23.058</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\PenTouch.exe">
+      <PackagePath>PenTouch.exe</PackagePath>
+      <Modified>2012-10-23T04:49:22.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\PenTouch.pdb">
+      <PackagePath>PenTouch.pdb</PackagePath>
+      <Modified>2012-10-23T04:49:22.650</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Assets\Logo.png">
+      <PackagePath>Assets\Logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-10-22T00:18:22.604</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Assets\SmallLogo.png">
+      <PackagePath>Assets\SmallLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-10-22T00:18:22.604</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Assets\SplashScreen.png">
+      <PackagePath>Assets\SplashScreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-10-22T00:18:22.604</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\Assets\StoreLogo.png">
+      <PackagePath>Assets\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2012-10-22T00:18:22.604</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\App.xaml">
+      <PackagePath>App.xaml</PackagePath>
+      <Modified>2012-10-22T00:18:22.604</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\CanvasEx.xaml">
+      <PackagePath>CanvasEx.xaml</PackagePath>
+      <Modified>2012-10-23T02:33:37.168</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\Common\StandardStyles.xaml">
+      <PackagePath>Common\StandardStyles.xaml</PackagePath>
+      <Modified>2012-10-22T00:18:22.615</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\MainPage.xaml">
+      <PackagePath>MainPage.xaml</PackagePath>
+      <Modified>2012-10-23T01:58:45.108</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\Themes\Generic.xaml">
+      <PackagePath>Themes\Generic.xaml</PackagePath>
+      <Modified>2012-10-22T05:43:30.186</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Programming\PenTouch\PenTouch\bin\Release\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2012-10-23T04:49:22.947</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
